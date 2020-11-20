@@ -1,13 +1,15 @@
 <?xml version="1.0"?>
 <opml version="2.0">
 	<head>
-		<title>nodeeditor.opml</title>
+		<title>opmlsrc.opml</title>
 		<dateCreated>Fri, 20 Nov 2020 15:12:35 GMT</dateCreated>
-		<dateModified>Fri, 20 Nov 2020 20:35:18 GMT</dateModified>
+		<dateModified>Fri, 20 Nov 2020 20:43:12 GMT</dateModified>
 		<ownerId>https://twitter.com/andrewshell/</ownerId>
 		<ownerName>Andrew Shell</ownerName>
-		<expansionState>1,7</expansionState>
-		<lastCursor>79</lastCursor>
+		<expansionState>1</expansionState>
+		<lastCursor>6</lastCursor>
+		<longTitle>OPML Source</longTitle>
+		<description>Command line tool to export source code from an opml outline.</description>
 		</head>
 	<body>
 		<outline text="/code.shll.me/opmlsrc/" created="Fri, 20 Nov 2020 15:12:35 GMT">
