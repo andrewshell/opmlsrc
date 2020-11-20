@@ -56,31 +56,36 @@ async function processIncludes (text) {
 	const match = text.match (new RegExp('^\\[\\[(.*)\\]\\]$'));
 	if (match) {
 		const url = match[1];
-		if (url.startsWith ('file:')) { // Local file include
-			const localFile = path.resolve (opmlDir, url.substr (5));
-			text = fs.readFileSync(localFile, 'utf8');
-			}
-		else { // Remote file include
-			const options = {};
-			const etag = etags[url];
-			if (etag && includeCache[url + etag]) {
-				options.headers = {
-					"If-None-Match": etag
-					};
+		try {
+			if (url.startsWith ('file:')) { // Local file include
+				const localFile = path.resolve (opmlDir, url.substr (5));
+				text = fs.readFileSync(localFile, 'utf8');
 				}
-			const res = await fetch(url, options);
-			if (res.status === 304) {
-				text = includeCache [url + etag];
-				}
-			if (res.status === 200) {
-				console.log('Fetching: ' + url);
-				text = res.text();
-				const resEtag = res.headers.get('Etag');
-				if (resEtag) {
-					includeCache[url + resEtag] = text;
-					etags[url] = resEtag;
+			else { // Remote file include
+				const options = {};
+				const etag = etags[url];
+				if (etag && includeCache[url + etag]) {
+					options.headers = {
+						"If-None-Match": etag
+						};
+					}
+				const res = await fetch(url, options);
+				if (res.status === 304) {
+					text = includeCache [url + etag];
+					}
+				if (res.status === 200) {
+					console.log('Fetching: ' + url);
+					text = res.text();
+					const resEtag = res.headers.get('Etag');
+					if (resEtag) {
+						includeCache[url + resEtag] = text;
+						etags[url] = resEtag;
+						}
 					}
 				}
+			}
+		catch (err) {
+			console.error(err.message + ': ' + url);
 			}
 		}
 	return text;
