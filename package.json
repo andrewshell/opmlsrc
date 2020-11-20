@@ -4,6 +4,11 @@
 	"author": "Andrew Shell <andrew@andrewshell.org>",
 	"license": "MIT",
 	"version": "0.1.0",
+	"homepage": "https://github.com/andrewshell/opmlsrc",
+	"repository": "github:andrewshell/opmlsrc",
+	"bugs": {
+		"url": "https://github.com/andrewshell/opmlsrc/issues"
+		},
 	"main": "opmlsrc.js",
 	"dependencies": {
 		"md5-file": "^5.0.0",

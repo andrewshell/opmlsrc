@@ -3,11 +3,11 @@
 	<head>
 		<title>opmlsrc.opml</title>
 		<dateCreated>Fri, 20 Nov 2020 15:12:35 GMT</dateCreated>
-		<dateModified>Fri, 20 Nov 2020 20:43:12 GMT</dateModified>
+		<dateModified>Fri, 20 Nov 2020 20:56:05 GMT</dateModified>
 		<ownerId>https://twitter.com/andrewshell/</ownerId>
 		<ownerName>Andrew Shell</ownerName>
-		<expansionState>1</expansionState>
-		<lastCursor>6</lastCursor>
+		<expansionState>1,6,7</expansionState>
+		<lastCursor>14</lastCursor>
 		<longTitle>OPML Source</longTitle>
 		<description>Command line tool to export source code from an opml outline.</description>
 		</head>
@@ -206,6 +206,12 @@
 					<outline text="&quot;author&quot;: &quot;Andrew Shell &lt;andrew@andrewshell.org&gt;&quot;," created="Fri, 20 Nov 2020 14:59:44 GMT"/>
 					<outline text="&quot;license&quot;: &quot;MIT&quot;," created="Fri, 20 Nov 2020 14:59:37 GMT"/>
 					<outline text="&quot;version&quot;: &quot;0.1.0&quot;," created="Fri, 20 Nov 2020 14:59:49 GMT"/>
+					<outline text="&quot;homepage&quot;: &quot;https://github.com/andrewshell/opmlsrc&quot;," created="Fri, 20 Nov 2020 20:54:55 GMT"/>
+					<outline text="&quot;repository&quot;: &quot;github:andrewshell/opmlsrc&quot;," created="Fri, 20 Nov 2020 20:54:18 GMT"/>
+					<outline text="&quot;bugs&quot;: {" created="Fri, 20 Nov 2020 20:55:34 GMT">
+						<outline text="&quot;url&quot;: &quot;https://github.com/andrewshell/opmlsrc/issues&quot;" created="Fri, 20 Nov 2020 20:55:51 GMT"/>
+						<outline text="}," created="Fri, 20 Nov 2020 20:55:46 GMT"/>
+						</outline>
 					<outline text="&quot;main&quot;: &quot;opmlsrc.js&quot;," created="Fri, 20 Nov 2020 15:13:52 GMT"/>
 					<outline text="&quot;dependencies&quot;: {" created="Fri, 20 Nov 2020 15:01:27 GMT">
 						<outline text="&quot;md5-file&quot;: &quot;^5.0.0&quot;," created="Fri, 20 Nov 2020 17:06:01 GMT"/>
