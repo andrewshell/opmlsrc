@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
 <opml version="2.0">
 	<head>
-		<title>opmlsrc.opml</title>
+		<title>nodeeditor.opml</title>
 		<dateCreated>Fri, 20 Nov 2020 15:12:35 GMT</dateCreated>
-		<dateModified>Fri, 20 Nov 2020 19:33:46 GMT</dateModified>
+		<dateModified>Fri, 20 Nov 2020 20:35:18 GMT</dateModified>
 		<ownerId>https://twitter.com/andrewshell/</ownerId>
 		<ownerName>Andrew Shell</ownerName>
-		<expansionState>1</expansionState>
-		<lastCursor>3</lastCursor>
+		<expansionState>1,7</expansionState>
+		<lastCursor>79</lastCursor>
 		</head>
 	<body>
 		<outline text="/code.shll.me/opmlsrc/" created="Fri, 20 Nov 2020 15:12:35 GMT">
@@ -29,6 +29,29 @@
 				<outline text="node_modules" created="Fri, 20 Nov 2020 19:32:38 GMT"/>
 				<outline text="package-lock.json" created="Fri, 20 Nov 2020 19:32:48 GMT"/>
 				</outline>
+			<outline text="LICENSE" created="Fri, 20 Nov 2020 19:59:41 GMT">
+				<outline text="MIT License" created="Fri, 20 Nov 2020 19:59:52 GMT"/>
+				<outline text="" created="Fri, 20 Nov 2020 19:59:58 GMT"/>
+				<outline text="Copyright (c) 2020 Andrew Shell" created="Fri, 20 Nov 2020 19:59:58 GMT"/>
+				<outline text="" created="Fri, 20 Nov 2020 19:59:59 GMT"/>
+				<outline text="Permission is hereby granted, free of charge, to any person obtaining a copy" created="Fri, 20 Nov 2020 19:59:59 GMT"/>
+				<outline text="of this software and associated documentation files (the &quot;Software&quot;), to deal" created="Fri, 20 Nov 2020 20:00:00 GMT"/>
+				<outline text="in the Software without restriction, including without limitation the rights" created="Fri, 20 Nov 2020 20:00:00 GMT"/>
+				<outline text="to use, copy, modify, merge, publish, distribute, sublicense, and/or sell" created="Fri, 20 Nov 2020 20:00:00 GMT"/>
+				<outline text="copies of the Software, and to permit persons to whom the Software is" created="Fri, 20 Nov 2020 20:00:00 GMT"/>
+				<outline text="furnished to do so, subject to the following conditions:" created="Fri, 20 Nov 2020 20:00:01 GMT"/>
+				<outline text="" created="Fri, 20 Nov 2020 20:00:01 GMT"/>
+				<outline text="The above copyright notice and this permission notice shall be included in all" created="Fri, 20 Nov 2020 20:00:01 GMT"/>
+				<outline text="copies or substantial portions of the Software." created="Fri, 20 Nov 2020 20:00:02 GMT"/>
+				<outline text="" created="Fri, 20 Nov 2020 20:00:02 GMT"/>
+				<outline text="THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR" created="Fri, 20 Nov 2020 20:00:03 GMT"/>
+				<outline text="IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY," created="Fri, 20 Nov 2020 20:00:04 GMT"/>
+				<outline text="FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE" created="Fri, 20 Nov 2020 20:00:04 GMT"/>
+				<outline text="AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER" created="Fri, 20 Nov 2020 20:00:04 GMT"/>
+				<outline text="LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM," created="Fri, 20 Nov 2020 20:00:04 GMT"/>
+				<outline text="OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE" created="Fri, 20 Nov 2020 20:00:04 GMT"/>
+				<outline text="SOFTWARE."/>
+				</outline>
 			<outline text="opmlsrc.js" created="Fri, 20 Nov 2020 15:50:41 GMT">
 				<outline text="const packagejson = require('./package.json');" created="Fri, 20 Nov 2020 15:50:45 GMT"/>
 				<outline text="const myProductName = packagejson.name, myVersion = packagejson.version;" created="Fri, 20 Nov 2020 16:00:33 GMT"/>
@@ -45,6 +68,7 @@
 					</outline>
 				<outline text="const etags = {}" created="Fri, 20 Nov 2020 18:28:44 GMT"/>
 				<outline text="const includeCache = {};" created="Fri, 20 Nov 2020 18:26:45 GMT"/>
+				<outline text="let opmlDir = process.cwd ();" created="Fri, 20 Nov 2020 20:20:59 GMT"/>
 				<outline text="" created="Fri, 20 Nov 2020 15:57:39 GMT"/>
 				<outline text="function exportFilesFromOpml (opmlsrc) {" created="Fri, 20 Nov 2020 15:57:50 GMT">
 					<outline text="if (!fs.existsSync(opmlsrc)) {" created="Fri, 20 Nov 2020 16:45:11 GMT">
@@ -78,11 +102,14 @@
 				<outline text="async function renderBody (children, tabs) {" created="Fri, 20 Nov 2020 15:51:07 GMT">
 					<outline text="let body = '', line;"/>
 					<outline text="for (line of children) {" created="Fri, 20 Nov 2020 15:51:11 GMT">
-						<outline text="if (line.iscomment) {" created="Fri, 20 Nov 2020 17:45:05 GMT">
+						<outline text="if (line.iscomment &amp;&amp; line.iscomment === 'true') {" created="Fri, 20 Nov 2020 17:45:05 GMT">
 							<outline text="continue;" created="Fri, 20 Nov 2020 17:45:19 GMT"/>
 							<outline text="}" created="Fri, 20 Nov 2020 17:45:17 GMT"/>
 							</outline>
-						<outline text="line.text = await processIncludes (line.text);" created="Fri, 20 Nov 2020 17:50:44 GMT"/>
+						<outline text="if (!line.flprocessinclude || line.flprocessinclude === 'true') {" created="Fri, 20 Nov 2020 20:09:34 GMT">
+							<outline text="line.text = await processIncludes (line.text);" created="Fri, 20 Nov 2020 17:50:44 GMT"/>
+							<outline text="}" created="Fri, 20 Nov 2020 20:09:46 GMT"/>
+							</outline>
 						<outline text="body += &quot;\t&quot;.repeat(tabs) + line.text + &quot;\n&quot;;" created="Fri, 20 Nov 2020 17:50:35 GMT"/>
 						<outline text="if (line.children) {" created="Fri, 20 Nov 2020 17:51:05 GMT">
 							<outline text="body += await renderBody(line.children, tabs + 1);" created="Fri, 20 Nov 2020 18:11:38 GMT"/>
@@ -97,31 +124,39 @@
 					<outline text="const match = text.match (new RegExp('^\\[\\[(.*)\\]\\]$'));" created="Fri, 20 Nov 2020 17:51:30 GMT"/>
 					<outline text="if (match) {" created="Fri, 20 Nov 2020 17:55:24 GMT">
 						<outline text="const url = match[1];" created="Fri, 20 Nov 2020 18:34:35 GMT"/>
-						<outline text="const options = {};" created="Fri, 20 Nov 2020 18:27:48 GMT"/>
-						<outline text="const etag = etags[url];" created="Fri, 20 Nov 2020 18:29:43 GMT"/>
-						<outline text="if (etag &amp;&amp; includeCache[url + etag]) {" created="Fri, 20 Nov 2020 18:27:18 GMT">
-							<outline text="options.headers = {" created="Fri, 20 Nov 2020 18:30:20 GMT">
-								<outline text="&quot;If-None-Match&quot;: etag" created="Fri, 20 Nov 2020 18:30:44 GMT"/>
-								<outline text="};" created="Fri, 20 Nov 2020 18:30:41 GMT"/>
-								</outline>
-							<outline text="}" created="Fri, 20 Nov 2020 18:27:45 GMT"/>
+						<outline text="if (url.startsWith ('file:')) { // Local file include" created="Fri, 20 Nov 2020 20:17:54 GMT">
+							<outline text="const localFile = path.resolve (opmlDir, url.substr (5));" created="Fri, 20 Nov 2020 20:22:26 GMT"/>
+							<outline text="text = fs.readFileSync(localFile, 'utf8');" created="Fri, 20 Nov 2020 20:24:48 GMT"/>
+							<outline text="}" created="Fri, 20 Nov 2020 20:18:52 GMT"/>
 							</outline>
-						<outline text="const res = await fetch(url, options); " created="Fri, 20 Nov 2020 18:07:14 GMT"/>
-						<outline text="if (res.status === 304) {" created="Fri, 20 Nov 2020 18:31:45 GMT">
-							<outline text="console.log('Cached: ' + url);" created="Fri, 20 Nov 2020 18:42:15 GMT" isComment="true"/>
-							<outline text="text = includeCache [url + etag];" created="Fri, 20 Nov 2020 18:31:58 GMT"/>
-							<outline text="}" created="Fri, 20 Nov 2020 18:31:56 GMT"/>
-							</outline>
-						<outline text="if (res.status === 200) {" created="Fri, 20 Nov 2020 18:32:25 GMT">
-							<outline text="console.log('Fetching: ' + url);" created="Fri, 20 Nov 2020 18:42:24 GMT"/>
-							<outline text="text = res.text();" created="Fri, 20 Nov 2020 18:38:12 GMT"/>
-							<outline text="const resEtag = res.headers.get('Etag');" created="Fri, 20 Nov 2020 18:32:37 GMT"/>
-							<outline text="if (resEtag) {" created="Fri, 20 Nov 2020 18:33:03 GMT">
-								<outline text="includeCache[url + resEtag] = text;" created="Fri, 20 Nov 2020 18:33:12 GMT"/>
-								<outline text="etags[url] = resEtag;" created="Fri, 20 Nov 2020 18:34:21 GMT"/>
-								<outline text="}" created="Fri, 20 Nov 2020 18:33:10 GMT"/>
+						<outline text="else { // Remote file include" created="Fri, 20 Nov 2020 20:18:54 GMT">
+							<outline text="const options = {};" created="Fri, 20 Nov 2020 18:27:48 GMT"/>
+							<outline text="const etag = etags[url];" created="Fri, 20 Nov 2020 18:29:43 GMT"/>
+							<outline text="if (etag &amp;&amp; includeCache[url + etag]) {" created="Fri, 20 Nov 2020 18:27:18 GMT">
+								<outline text="options.headers = {" created="Fri, 20 Nov 2020 18:30:20 GMT">
+									<outline text="&quot;If-None-Match&quot;: etag" created="Fri, 20 Nov 2020 18:30:44 GMT"/>
+									<outline text="};" created="Fri, 20 Nov 2020 18:30:41 GMT"/>
+									</outline>
+								<outline text="}" created="Fri, 20 Nov 2020 18:27:45 GMT"/>
 								</outline>
-							<outline text="}" created="Fri, 20 Nov 2020 18:32:33 GMT"/>
+							<outline text="const res = await fetch(url, options); " created="Fri, 20 Nov 2020 18:07:14 GMT"/>
+							<outline text="if (res.status === 304) {" created="Fri, 20 Nov 2020 18:31:45 GMT">
+								<outline text="console.log('Cached: ' + url);" created="Fri, 20 Nov 2020 18:42:15 GMT" isComment="true"/>
+								<outline text="text = includeCache [url + etag];" created="Fri, 20 Nov 2020 18:31:58 GMT"/>
+								<outline text="}" created="Fri, 20 Nov 2020 18:31:56 GMT"/>
+								</outline>
+							<outline text="if (res.status === 200) {" created="Fri, 20 Nov 2020 18:32:25 GMT">
+								<outline text="console.log('Fetching: ' + url);" created="Fri, 20 Nov 2020 18:42:24 GMT"/>
+								<outline text="text = res.text();" created="Fri, 20 Nov 2020 18:38:12 GMT"/>
+								<outline text="const resEtag = res.headers.get('Etag');" created="Fri, 20 Nov 2020 18:32:37 GMT"/>
+								<outline text="if (resEtag) {" created="Fri, 20 Nov 2020 18:33:03 GMT">
+									<outline text="includeCache[url + resEtag] = text;" created="Fri, 20 Nov 2020 18:33:12 GMT"/>
+									<outline text="etags[url] = resEtag;" created="Fri, 20 Nov 2020 18:34:21 GMT"/>
+									<outline text="}" created="Fri, 20 Nov 2020 18:33:10 GMT"/>
+									</outline>
+								<outline text="}" created="Fri, 20 Nov 2020 18:32:33 GMT"/>
+								</outline>
+							<outline text="}" created="Fri, 20 Nov 2020 20:19:12 GMT"/>
 							</outline>
 						<outline text="}" created="Fri, 20 Nov 2020 17:59:54 GMT"/>
 						</outline>
@@ -145,6 +180,7 @@
 				<outline text="function run (opmlsrc, watch = false) {" created="Fri, 20 Nov 2020 16:33:27 GMT">
 					<outline text="if (watch) {" created="Fri, 20 Nov 2020 16:39:51 GMT">
 						<outline text="console.log('Watching ' + opmlsrc + '...');" created="Fri, 20 Nov 2020 16:48:24 GMT"/>
+						<outline text="opmlDir = path.resolve(process.cwd (), path.dirname(opmlsrc));" created="Fri, 20 Nov 2020 20:21:29 GMT"/>
 						<outline text="let timeout;" created="Fri, 20 Nov 2020 16:54:24 GMT"/>
 						<outline text="exportFilesFromOpml(opmlsrc); // Run once right away" created="Fri, 20 Nov 2020 19:04:03 GMT"/>
 						<outline text="fs.watch (opmlsrc, function () {" created="Fri, 20 Nov 2020 16:46:27 GMT">
@@ -164,7 +200,7 @@
 			<outline text="package.json" created="Fri, 20 Nov 2020 14:58:13 GMT">
 				<outline text="{" created="Fri, 20 Nov 2020 14:58:53 GMT">
 					<outline text="&quot;name&quot;: &quot;@andrewshell/opmlsrc&quot;," created="Fri, 20 Nov 2020 14:59:16 GMT"/>
-					<outline text="&quot;description&quot;: &quot;Tool to export source code from an opml outline&quot;," created="Fri, 20 Nov 2020 14:59:26 GMT"/>
+					<outline text="&quot;description&quot;: &quot;Command line tool to export source code from an opml outline.&quot;," created="Fri, 20 Nov 2020 14:59:26 GMT"/>
 					<outline text="&quot;author&quot;: &quot;Andrew Shell &lt;andrew@andrewshell.org&gt;&quot;," created="Fri, 20 Nov 2020 14:59:44 GMT"/>
 					<outline text="&quot;license&quot;: &quot;MIT&quot;," created="Fri, 20 Nov 2020 14:59:37 GMT"/>
 					<outline text="&quot;version&quot;: &quot;0.1.0&quot;," created="Fri, 20 Nov 2020 14:59:49 GMT"/>
@@ -182,6 +218,81 @@
 						</outline>
 					<outline text="}" created="Fri, 20 Nov 2020 15:14:19 GMT"/>
 					</outline>
+				</outline>
+			<outline text="README.md" created="Fri, 20 Nov 2020 19:56:36 GMT">
+				<outline text="# OPML Source" created="Fri, 20 Nov 2020 19:56:40 GMT"/>
+				<outline text="Command line tool to export source code from an opml outline." created="Fri, 20 Nov 2020 19:56:45 GMT"/>
+				<outline text="" created="Fri, 20 Nov 2020 19:56:48 GMT"/>
+				<outline text="Based on [nodeEditor example](http://this.how/frontier/nodeEditorExample.opml)" created="Fri, 20 Nov 2020 19:56:54 GMT"/>
+				<outline text="" created="Fri, 20 Nov 2020 19:56:54 GMT"/>
+				<outline text="## Install Globally" created="Fri, 20 Nov 2020 19:56:50 GMT"/>
+				<outline text="```" created="Fri, 20 Nov 2020 19:57:40 GMT"/>
+				<outline text="npm install -g @andrewshell/opmlsrc" created="Fri, 20 Nov 2020 19:57:41 GMT"/>
+				<outline text="```" created="Fri, 20 Nov 2020 19:56:58 GMT"/>
+				<outline text="" created="Fri, 20 Nov 2020 19:57:51 GMT"/>
+				<outline text="## Test with davefilesystem.opml" created="Fri, 20 Nov 2020 19:57:00 GMT"/>
+				<outline text="" created="Fri, 20 Nov 2020 19:58:32 GMT"/>
+				<outline text="You'll want to have a properly formatted OPML file like [davefilesystem.opml](http://code.shll.me/davefilesystem.opml?format=opml)." created="Fri, 20 Nov 2020 19:57:58 GMT"/>
+				<outline text="" created="Fri, 20 Nov 2020 19:58:30 GMT"/>
+				<outline text="Calling `opmlsrc &lt;filename&gt;` will process the file into the current directory." created="Fri, 20 Nov 2020 19:58:33 GMT"/>
+				<outline text="" created="Fri, 20 Nov 2020 19:58:38 GMT"/>
+				<outline text="### Example" created="Fri, 20 Nov 2020 19:58:36 GMT"/>
+				<outline text="" created="Fri, 20 Nov 2020 19:58:39 GMT"/>
+				<outline text="```" created="Fri, 20 Nov 2020 19:58:40 GMT"/>
+				<outline text="cd ~" created="Fri, 20 Nov 2020 19:58:41 GMT"/>
+				<outline text="mkdir davefilesystem" created="Fri, 20 Nov 2020 19:58:41 GMT"/>
+				<outline text="cd davefilesystem" created="Fri, 20 Nov 2020 19:58:42 GMT"/>
+				<outline text="wget http://code.shll.me/davefilesystem.opml?format=opml -O davefilesystem.opml" created="Fri, 20 Nov 2020 19:58:42 GMT"/>
+				<outline text="opmlsrc davefilesystem.opml" created="Fri, 20 Nov 2020 19:58:42 GMT"/>
+				<outline text="ls -la" created="Fri, 20 Nov 2020 19:58:43 GMT"/>
+				<outline text="```" created="Fri, 20 Nov 2020 19:58:43 GMT"/>
+				<outline text="" created="Fri, 20 Nov 2020 19:58:45 GMT"/>
+				<outline text="You should see something like:" created="Fri, 20 Nov 2020 19:58:44 GMT"/>
+				<outline text="" created="Fri, 20 Nov 2020 19:58:45 GMT"/>
+				<outline text="```" created="Fri, 20 Nov 2020 19:58:46 GMT"/>
+				<outline text="total 48" created="Fri, 20 Nov 2020 19:58:46 GMT"/>
+				<outline text="drwxr-xr-x   7 andrewshell  staff   224 Nov 20 13:55 ." created="Fri, 20 Nov 2020 19:58:46 GMT"/>
+				<outline text="drwxr-xr-x+ 93 andrewshell  staff  2976 Nov 20 13:54 .." created="Fri, 20 Nov 2020 19:58:47 GMT"/>
+				<outline text="-rw-r--r--   1 andrewshell  staff  5396 Nov 20 13:55 davefilesystem.opml" created="Fri, 20 Nov 2020 19:58:47 GMT"/>
+				<outline text="-rw-r--r--   1 andrewshell  staff  5532 Nov 20 13:55 filesystem.js" created="Fri, 20 Nov 2020 19:58:47 GMT"/>
+				<outline text="-rw-r--r--   1 andrewshell  staff   351 Nov 20 13:55 package.json" created="Fri, 20 Nov 2020 19:58:47 GMT"/>
+				<outline text="-rw-r--r--   1 andrewshell  staff   577 Nov 20 13:55 readme.md" created="Fri, 20 Nov 2020 19:58:47 GMT"/>
+				<outline text="drwxr-xr-x   4 andrewshell  staff   128 Nov 20 13:55 testing" created="Fri, 20 Nov 2020 19:58:47 GMT"/>
+				<outline text="```" created="Fri, 20 Nov 2020 19:58:47 GMT"/>
+				<outline text="" created="Fri, 20 Nov 2020 20:01:07 GMT"/>
+				<outline text="## Watching during development" created="Fri, 20 Nov 2020 20:01:08 GMT"/>
+				<outline text="" created="Fri, 20 Nov 2020 20:01:16 GMT"/>
+				<outline text="If you're actively working on a project you might want the files to be updated when you update the outline.  Do do this just add the `--watch` flag to your call." created="Fri, 20 Nov 2020 20:01:16 GMT"/>
+				<outline text="" created="Fri, 20 Nov 2020 20:02:14 GMT"/>
+				<outline text="```" created="Fri, 20 Nov 2020 20:02:14 GMT"/>
+				<outline text="opmlsrc davefilesystem.opml --watch" created="Fri, 20 Nov 2020 20:02:16 GMT"/>
+				<outline text="```" created="Fri, 20 Nov 2020 20:02:16 GMT"/>
+				<outline text="" created="Fri, 20 Nov 2020 20:02:37 GMT"/>
+				<outline text="## Supports includes" created="Fri, 20 Nov 2020 20:02:38 GMT"/>
+				<outline text="" created="Fri, 20 Nov 2020 20:03:18 GMT"/>
+				<outline text="If you look in `davefilesystem.opml` you'll see the line:" created="Fri, 20 Nov 2020 20:03:18 GMT"/>
+				<outline text="" created="Fri, 20 Nov 2020 20:03:39 GMT"/>
+				<outline text="```" created="Fri, 20 Nov 2020 20:03:40 GMT"/>
+				<outline text="[[http://fargo.io/code/node/shared/fs.js]]" created="Fri, 20 Nov 2020 20:03:41 GMT" flProcessInclude="false"/>
+				<outline text="```" created="Fri, 20 Nov 2020 20:03:42 GMT"/>
+				<outline text="" created="Fri, 20 Nov 2020 20:03:43 GMT"/>
+				<outline text="This is an include. We will fetch this document and replace that block with the file contents." created="Fri, 20 Nov 2020 20:03:44 GMT"/>
+				<outline text="" created="Fri, 20 Nov 2020 20:04:21 GMT"/>
+				<outline text="When you're watching an outline with includes in it, I try to be helpful and cache the file in memory.  On every build we re-request this document with the last etag and if we get back a status 304 Not Modified than we use the local cache." created="Fri, 20 Nov 2020 20:04:22 GMT"/>
+				<outline text="" created="Fri, 20 Nov 2020 20:14:46 GMT"/>
+				<outline text="### Local includes" created="Fri, 20 Nov 2020 20:14:46 GMT" isComment="false"/>
+				<outline text="" created="Fri, 20 Nov 2020 20:30:07 GMT"/>
+				<outline text="In addition to specifying a full URL, you can include local files by using the `file:` prefix like this:" created="Fri, 20 Nov 2020 20:30:08 GMT"/>
+				<outline text="" created="Fri, 20 Nov 2020 20:30:54 GMT"/>
+				<outline text="```" created="Fri, 20 Nov 2020 20:30:55 GMT"/>
+				<outline text="[[file:package.json]]" created="Fri, 20 Nov 2020 20:30:59 GMT" flProcessInclude="false"/>
+				<outline text="```" created="Fri, 20 Nov 2020 20:30:57 GMT"/>
+				<outline text="" created="Fri, 20 Nov 2020 20:31:26 GMT"/>
+				<outline text="It will try to find your file based on the location of the opml file you're processing." created="Fri, 20 Nov 2020 20:31:27 GMT"/>
+				<outline text="" created="Fri, 20 Nov 2020 20:34:04 GMT"/>
+				<outline text="## Ignores comments" created="Fri, 20 Nov 2020 20:34:05 GMT" isComment="false"/>
+				<outline text="" created="Fri, 20 Nov 2020 20:34:11 GMT"/>
+				<outline text="If your OPML file has an outline with the attribute isComment=true, we will ignore that branch and it will not end up in the rendered file." created="Fri, 20 Nov 2020 20:34:12 GMT"/>
 				</outline>
 			</outline>
 		</body>

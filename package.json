@@ -1,6 +1,6 @@
 {
 	"name": "@andrewshell/opmlsrc",
-	"description": "Tool to export source code from an opml outline",
+	"description": "Command line tool to export source code from an opml outline.",
 	"author": "Andrew Shell <andrew@andrewshell.org>",
 	"license": "MIT",
 	"version": "0.1.0",
@@ -10,8 +10,8 @@
 		"node-fetch": "^2.6.1",
 		"opml-to-json": "0.0.3",
 		"yargs": "^16.1.1"
-	},
+		},
 	"bin": {
 		"opmlsrc": "bin/opmlsrc.js"
+		}
 	}
-}

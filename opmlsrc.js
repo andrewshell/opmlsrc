@@ -12,6 +12,7 @@ exports.run = run;
 	const path = require('path');
 const etags = {}
 const includeCache = {};
+let opmlDir = process.cwd ();
 
 function exportFilesFromOpml (opmlsrc) {
 	if (!fs.existsSync(opmlsrc)) {
@@ -38,10 +39,12 @@ function saveFile (filenode) {
 async function renderBody (children, tabs) {
 	let body = '', line;
 	for (line of children) {
-		if (line.iscomment) {
+		if (line.iscomment && line.iscomment === 'true') {
 			continue;
 			}
-		line.text = await processIncludes (line.text);
+		if (!line.flprocessinclude || line.flprocessinclude === 'true') {
+			line.text = await processIncludes (line.text);
+			}
 		body += "\t".repeat(tabs) + line.text + "\n";
 		if (line.children) {
 			body += await renderBody(line.children, tabs + 1);
@@ -53,24 +56,30 @@ async function processIncludes (text) {
 	const match = text.match (new RegExp('^\\[\\[(.*)\\]\\]$'));
 	if (match) {
 		const url = match[1];
-		const options = {};
-		const etag = etags[url];
-		if (etag && includeCache[url + etag]) {
-			options.headers = {
-				"If-None-Match": etag
-				};
+		if (url.startsWith ('file:')) { // Local file include
+			const localFile = path.resolve (opmlDir, url.substr (5));
+			text = fs.readFileSync(localFile, 'utf8');
 			}
-		const res = await fetch(url, options);
-		if (res.status === 304) {
-			text = includeCache [url + etag];
-			}
-		if (res.status === 200) {
-			console.log('Fetching: ' + url);
-			text = res.text();
-			const resEtag = res.headers.get('Etag');
-			if (resEtag) {
-				includeCache[url + resEtag] = text;
-				etags[url] = resEtag;
+		else { // Remote file include
+			const options = {};
+			const etag = etags[url];
+			if (etag && includeCache[url + etag]) {
+				options.headers = {
+					"If-None-Match": etag
+					};
+				}
+			const res = await fetch(url, options);
+			if (res.status === 304) {
+				text = includeCache [url + etag];
+				}
+			if (res.status === 200) {
+				console.log('Fetching: ' + url);
+				text = res.text();
+				const resEtag = res.headers.get('Etag');
+				if (resEtag) {
+					includeCache[url + resEtag] = text;
+					etags[url] = resEtag;
+					}
 				}
 			}
 		}
@@ -90,6 +99,7 @@ function writeFileIfChanged (filename, body) {
 function run (opmlsrc, watch = false) {
 	if (watch) {
 		console.log('Watching ' + opmlsrc + '...');
+		opmlDir = path.resolve(process.cwd (), path.dirname(opmlsrc));
 		let timeout;
 		exportFilesFromOpml(opmlsrc); // Run once right away
 		fs.watch (opmlsrc, function () {
