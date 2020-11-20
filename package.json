@@ -3,7 +3,7 @@
 	"description": "Command line tool to export source code from an opml outline.",
 	"author": "Andrew Shell <andrew@andrewshell.org>",
 	"license": "MIT",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"homepage": "https://github.com/andrewshell/opmlsrc",
 	"repository": "github:andrewshell/opmlsrc",
 	"bugs": {
